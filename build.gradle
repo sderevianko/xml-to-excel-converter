@@ -1,0 +1,52 @@
+import org.w3c.dom.*;
+import javax.xml.parsers.*;
+import java.io.*;
+
+plugins {
+    id 'java'
+}
+
+group 'com.github.sderevianko'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.apache.poi', name: 'poi', version: '4.1.0'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+//Get Document Builder
+DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+DocumentBuilder builder = factory.newDocumentBuilder();
+
+//Build Document
+Document document = builder.parse(new File("C:\\Users\\serya\\Desktop\\OOP\\gradle\\hello-gradle\\src\\main\\resources\\xml\\BreakfastMenu.xml"));
+
+//Normalize the XML Structure; It's just too important !!
+document.getDocumentElement().normalize();
+
+//Here comes the root node
+Element root = document.getDocumentElement();
+System.out.println(root.getNodeName());
+
+//Get all employees
+NodeList nList = document.getElementsByTagName("food");
+System.out.println("============================");
+
+for (int temp = 0; temp < nList.getLength(); temp++)
+{
+    Node node = nList.item(temp);
+    System.out.print("");    //Just a separator
+    if (node.getNodeType() == Node.ELEMENT_NODE)
+    {
+        //Print each employee's detail
+        Element eElement = (Element) node;
+        System.out.println("name : "    + eElement.getElementsByTagName("name").item(0).getTextContent());
+        System.out.println("price : "  + eElement.getElementsByTagName("price").item(0).getTextContent());
+        System.out.println("description : "   + eElement.getElementsByTagName("description").item(0).getTextContent());
+        System.out.println("calories : "    + eElement.getElementsByTagName("calories").item(0).getTextContent());
+    }
+}
