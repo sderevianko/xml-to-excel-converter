@@ -27,14 +27,12 @@ public class ParserXml {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-       // File file
-        //Document document = new File(classLoader.getResource("\xml\BreakfastMenu.xml").getFile());
-        Document document = builder.parse(new File("C:\\Users\\serya\\Desktop\\OOP\\gradle\\hello-gradle\\src\\main\\resources\\xml\\BreakfastMenu.xml"));
+        Document document = builder.parse(new File(classLoader.getResource("xml\\BreakfastMenu.xml").getFile()));
 
         document.getDocumentElement().normalize();
 
-        //Element root = document.getDocumentElement();
-        //System.out.println(root.getNodeName());
+        Element root = document.getDocumentElement();
+        System.out.println(root.getNodeName());
 
         NodeList nList = document.getElementsByTagName("food");
 
@@ -51,7 +49,7 @@ public class ParserXml {
                 foodItems.add(index++, foodItem);
             }
         }
-        return getFoodItems();
+        return foodItems;
     }
 
     @Override

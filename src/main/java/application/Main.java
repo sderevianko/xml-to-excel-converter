@@ -13,8 +13,12 @@ public class Main {
 
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
         ParserXml parser = new ParserXml();
-        List<FoodItem> foodItems2 = parser.parserXml();
+        parser.parserXml();
+
         ExcelWriter excelWriter = new ExcelWriter();
-        excelWriter.excelWriter();
+        excelWriter.tableConstructor();
+        excelWriter.excelWriter(parser.getFoodItems());
+        excelWriter.fileCreator();
+
     }
 }

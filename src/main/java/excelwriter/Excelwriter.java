@@ -22,14 +22,12 @@ import java.util.List;
 
 public class ExcelWriter {
 
-    public void excelWriter() throws IOException, ParserConfigurationException, SAXException {
+    private Workbook workbook;
+    private Sheet sheet;
 
-
-        //fooditems2 = parser.parserXml();
-
-        Workbook workbook = new XSSFWorkbook();
-
-        Sheet sheet = workbook.createSheet("Food");
+    public void tableConstructor() {
+        workbook = new XSSFWorkbook();
+        sheet = workbook.createSheet("Food");
         sheet.setColumnWidth(0, 7000);
         sheet.setColumnWidth(1, 2000);
         sheet.setColumnWidth(2, 22000);
@@ -62,6 +60,9 @@ public class ExcelWriter {
         headerCell = header.createCell(3);
         headerCell.setCellValue("Calories");
         headerCell.setCellStyle(headerStyle);
+    }
+
+    public void excelWriter(List<FoodItem> foodItems) throws IOException, ParserConfigurationException, SAXException {
 
         CellStyle style = workbook.createCellStyle();
         style.setWrapText(true);
@@ -87,7 +88,9 @@ public class ExcelWriter {
             cell.setCellValue(foodItems.get(i - 1).getCalories());
             cell.setCellStyle(style);
         }
+    }
 
+    public void fileCreator() throws IOException {
         File currDir = new File(".");
         String path = currDir.getAbsolutePath();
         String fileLocation = path.substring(0, path.length() - 1) + "breakfast_menu.xlsx";
@@ -96,4 +99,5 @@ public class ExcelWriter {
         workbook.write(outputStream);
         workbook.close();
     }
+
 }
