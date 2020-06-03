@@ -17,7 +17,7 @@ import java.util.List;
 
 public class XmlParser {
 
-    private List<FoodItem> foodItems = new ArrayList<>();
+    private final List<FoodItem> foodItems = new ArrayList<>();
 
     public List<FoodItem> getFoodItems() {
         return foodItems;
