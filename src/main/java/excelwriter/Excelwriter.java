@@ -11,7 +11,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.xml.sax.SAXException;
-import parserxml.Parserxml;
+import parserxml.ParserXml;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
@@ -20,13 +20,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Excelwriter {
+public class ExcelWriter {
 
     public void excelWriter() throws IOException, ParserConfigurationException, SAXException {
 
-        Parserxml parser = new Parserxml();
-        List<FoodItem> fooditems2 = new ArrayList<>();
-        fooditems2 = parser.parserXml();
+
+        //fooditems2 = parser.parserXml();
 
         Workbook workbook = new XSSFWorkbook();
 
@@ -68,23 +67,24 @@ public class Excelwriter {
         style.setWrapText(true);
         Row row;
         Cell cell;
+
         for (int i = 1; i <= 5; i++) {
 
             row = sheet.createRow(i);
             cell = row.createCell(0);
-            cell.setCellValue(fooditems2.get(i - 1).getName());
+            cell.setCellValue(foodItems.get(i - 1).getName());
             cell.setCellStyle(style);
 
             cell = row.createCell(1);
-            cell.setCellValue(fooditems2.get(i - 1).getPrice());
+            cell.setCellValue(foodItems.get(i - 1).getPrice());
             cell.setCellStyle(style);
 
             cell = row.createCell(2);
-            cell.setCellValue(fooditems2.get(i - 1).getDescription());
+            cell.setCellValue(foodItems.get(i - 1).getDescription());
             cell.setCellStyle(style);
 
             cell = row.createCell(3);
-            cell.setCellValue(fooditems2.get(i - 1).getCalories());
+            cell.setCellValue(foodItems.get(i - 1).getCalories());
             cell.setCellStyle(style);
         }
 

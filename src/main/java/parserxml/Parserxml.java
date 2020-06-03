@@ -15,49 +15,49 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Parserxml {
+public class ParserXml {
 
-    private List<FoodItem> fooditems = new ArrayList<>();
+    private List<FoodItem> foodItems = new ArrayList<>();
 
-    public List<FoodItem> getFooditems() {
-        return fooditems;
+    public List<FoodItem> getFoodItems() {
+        return foodItems;
     }
 
     public List<FoodItem> parserXml() throws IOException, SAXException, ParserConfigurationException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-
+        ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+       // File file
+        //Document document = new File(classLoader.getResource("\xml\BreakfastMenu.xml").getFile());
         Document document = builder.parse(new File("C:\\Users\\serya\\Desktop\\OOP\\gradle\\hello-gradle\\src\\main\\resources\\xml\\BreakfastMenu.xml"));
 
         document.getDocumentElement().normalize();
 
-        Element root = document.getDocumentElement();
-        System.out.println(root.getNodeName());
+        //Element root = document.getDocumentElement();
+        //System.out.println(root.getNodeName());
 
         NodeList nList = document.getElementsByTagName("food");
-        System.out.println("============================");
 
         int index = 0;
         for (int temp = 0; temp < nList.getLength(); temp++) {
             Node node = nList.item(temp);
-            System.out.print("");
             if (node.getNodeType() == Node.ELEMENT_NODE) {
-                Element eElement = (Element) node;
+                Element element = (Element) node;
                 FoodItem foodItem = new FoodItem(
-                    eElement.getElementsByTagName("name").item(0).getTextContent(),
-                    eElement.getElementsByTagName("price").item(0).getTextContent(),
-                    eElement.getElementsByTagName("description").item(0).getTextContent(),
-                    eElement.getElementsByTagName("calories").item(0).getTextContent());
-                fooditems.add(index++, foodItem);
+                    element.getElementsByTagName("name").item(0).getTextContent(),
+                    element.getElementsByTagName("price").item(0).getTextContent(),
+                    element.getElementsByTagName("description").item(0).getTextContent(),
+                    element.getElementsByTagName("calories").item(0).getTextContent());
+                foodItems.add(index++, foodItem);
             }
         }
-        return getFooditems();
+        return getFoodItems();
     }
 
     @Override
     public String toString() {
-        return "Parserxml{" +
-            "fooditems=" + fooditems +
+        return "ParserXml{" +
+            "foodItems=" + foodItems +
             '}';
     }
 }
