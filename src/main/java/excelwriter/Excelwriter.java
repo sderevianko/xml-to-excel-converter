@@ -11,13 +11,11 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.xml.sax.SAXException;
-import parserxml.ParserXml;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ExcelWriter {
@@ -25,7 +23,7 @@ public class ExcelWriter {
     private Workbook workbook;
     private Sheet sheet;
 
-    public void tableConstructor() {
+    public void constructTable() {
         workbook = new XSSFWorkbook();
         sheet = workbook.createSheet("Food");
         sheet.setColumnWidth(0, 7000);
@@ -62,7 +60,7 @@ public class ExcelWriter {
         headerCell.setCellStyle(headerStyle);
     }
 
-    public void excelWriter(List<FoodItem> foodItems) throws IOException, ParserConfigurationException, SAXException {
+    public void writeToExcel(List<FoodItem> foodItems) throws IOException, ParserConfigurationException, SAXException {
 
         CellStyle style = workbook.createCellStyle();
         style.setWrapText(true);
@@ -70,27 +68,27 @@ public class ExcelWriter {
         Cell cell;
 
         for (int i = 1; i <= 5; i++) {
-
+            FoodItem food = foodItems.get(i - 1);
             row = sheet.createRow(i);
             cell = row.createCell(0);
-            cell.setCellValue(foodItems.get(i - 1).getName());
+            cell.setCellValue(food.getName());
             cell.setCellStyle(style);
 
             cell = row.createCell(1);
-            cell.setCellValue(foodItems.get(i - 1).getPrice());
+            cell.setCellValue(food.getPrice());
             cell.setCellStyle(style);
 
             cell = row.createCell(2);
-            cell.setCellValue(foodItems.get(i - 1).getDescription());
+            cell.setCellValue(food.getDescription());
             cell.setCellStyle(style);
 
             cell = row.createCell(3);
-            cell.setCellValue(foodItems.get(i - 1).getCalories());
+            cell.setCellValue(food.getCalories());
             cell.setCellStyle(style);
         }
     }
 
-    public void fileCreator() throws IOException {
+    public void сreateFile() throws IOException {
         File currDir = new File(".");
         String path = currDir.getAbsolutePath();
         String fileLocation = path.substring(0, path.length() - 1) + "breakfast_menu.xlsx";
@@ -99,5 +97,4 @@ public class ExcelWriter {
         workbook.write(outputStream);
         workbook.close();
     }
-
 }

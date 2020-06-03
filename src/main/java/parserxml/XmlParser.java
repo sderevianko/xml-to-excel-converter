@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParserXml {
+public class XmlParser {
 
     private List<FoodItem> foodItems = new ArrayList<>();
 
@@ -23,11 +23,11 @@ public class ParserXml {
         return foodItems;
     }
 
-    public List<FoodItem> parserXml() throws IOException, SAXException, ParserConfigurationException {
+    public List<FoodItem> parseXml() throws IOException, SAXException, ParserConfigurationException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-        Document document = builder.parse(new File(classLoader.getResource("xml\\BreakfastMenu.xml").getFile()));
+        Document document = builder.parse(new File(classLoader.getResource("xml/BreakfastMenu.xml").getFile()));
 
         document.getDocumentElement().normalize();
 
