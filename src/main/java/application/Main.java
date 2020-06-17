@@ -10,12 +10,12 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
-        XmlParser parser = new XmlParser();
+        final XmlParser parser = new XmlParser();
         parser.parseXml();
 
-        ExcelWriter excelWriter = new ExcelWriter();
+        final ExcelWriter excelWriter = new ExcelWriter();
         excelWriter.constructTable();
         excelWriter.writeToExcel(parser.getFoodItems());
-        excelWriter.сreateFile();
+        excelWriter.createFile();
     }
 }

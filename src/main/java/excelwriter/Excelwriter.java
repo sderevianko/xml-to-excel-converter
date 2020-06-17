@@ -31,13 +31,13 @@ public class ExcelWriter {
         sheet.setColumnWidth(2, 22000);
         sheet.setColumnWidth(3, 2000);
 
-        Row header = sheet.createRow(0);
+        final Row header = sheet.createRow(0);
 
-        CellStyle headerStyle = workbook.createCellStyle();
+        final CellStyle headerStyle = workbook.createCellStyle();
         headerStyle.setFillForegroundColor(IndexedColors.WHITE.getIndex());
         headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 
-        XSSFFont font = ((XSSFWorkbook) workbook).createFont();
+        final XSSFFont font = ((XSSFWorkbook) workbook).createFont();
         font.setFontName("Calibri");
         font.setFontHeightInPoints((short) 11);
         font.setBold(true);
@@ -62,7 +62,7 @@ public class ExcelWriter {
 
     public void writeToExcel(List<FoodItem> foodItems) throws IOException, ParserConfigurationException, SAXException {
 
-        CellStyle style = workbook.createCellStyle();
+        final CellStyle style = workbook.createCellStyle();
         style.setWrapText(true);
         Row row;
         Cell cell;
@@ -88,12 +88,12 @@ public class ExcelWriter {
         }
     }
 
-    public void сreateFile() throws IOException {
-        File currDir = new File(".");
-        String path = currDir.getAbsolutePath();
-        String fileLocation = path.substring(0, path.length() - 1) + "breakfast_menu.xlsx";
+    public void createFile() throws IOException {
+        final File currDir = new File(".");
+        final String path = currDir.getAbsolutePath();
+        final String fileLocation = path.substring(0, path.length() - 1) + "breakfast_menu.xlsx";
 
-        FileOutputStream outputStream = new FileOutputStream(fileLocation);
+        final FileOutputStream outputStream = new FileOutputStream(fileLocation);
         workbook.write(outputStream);
         workbook.close();
     }

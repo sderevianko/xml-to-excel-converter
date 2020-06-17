@@ -24,24 +24,24 @@ public class XmlParser {
     }
 
     public List<FoodItem> parseXml() throws IOException, SAXException, ParserConfigurationException {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-        Document document = builder.parse(new File(classLoader.getResource("xml/BreakfastMenu.xml").getFile()));
+        final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        final DocumentBuilder builder = factory.newDocumentBuilder();
+        final ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+        final Document document = builder.parse(new File(classLoader.getResource("xml/BreakfastMenu.xml").getFile()));
 
         document.getDocumentElement().normalize();
 
-        Element root = document.getDocumentElement();
+        final Element root = document.getDocumentElement();
         System.out.println(root.getNodeName());
 
-        NodeList nList = document.getElementsByTagName("food");
+        final NodeList nList = document.getElementsByTagName("food");
 
         int index = 0;
         for (int temp = 0; temp < nList.getLength(); temp++) {
-            Node node = nList.item(temp);
+            final Node node = nList.item(temp);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
-                Element element = (Element) node;
-                FoodItem foodItem = new FoodItem(
+                final Element element = (Element) node;
+                final FoodItem foodItem = new FoodItem(
                     element.getElementsByTagName("name").item(0).getTextContent(),
                     element.getElementsByTagName("price").item(0).getTextContent(),
                     element.getElementsByTagName("description").item(0).getTextContent(),
